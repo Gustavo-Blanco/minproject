@@ -2,7 +2,10 @@ package com.intercorp.minproject.util;
 
 import java.util.*;
 
-//https://eurodomik.ru/es/calculation/tochnoe-predskazanie-moei-smerti-kak-rasschitat-datu-svoei-smerti-po-date.html
+/*
+* Reference to numerology
+* https://eurodomik.ru/es/calculation/tochnoe-predskazanie-moei-smerti-kak-rasschitat-datu-svoei-smerti-po-date.html
+* */
 public class DeadNumerology {
 
     //depends on the key, the year of dead change by one of the values in the list

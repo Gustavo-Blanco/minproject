@@ -30,24 +30,20 @@ public class UserServImpl implements IUserService {
         Double ageAverage = new Media().calcMedia(users);
         Double standardDeviation = new StandardDeviation().calcDeviation(users, ageAverage);
 
-        KpiClients kpiClients = new KpiClients(ageAverage, standardDeviation);
-
-        return kpiClients;
+        return new KpiClients(ageAverage, standardDeviation);
     }
 
     @Override
     public List<ListClient> listClients() {
         List<User> users = iUserRepository.findAll();
 
-        return users.stream().map(user -> {
-            return new ListClient(
-                    user.getName(),
-                    user.getLastname(),
-                    user.getAge(),
-                    DateFormat.formatDate("dd/mm/yyyy", user.getBirthDay()),
-                    new DeadDay().calcDeadDate(user.getBirthDay())
-                    );
-        }).collect(Collectors.toList());
+        return users.stream().map(user -> new ListClient(
+                user.getName(),
+                user.getLastname(),
+                user.getAge(),
+                DateFormat.formatDate("dd/mm/yyyy", user.getBirthDay()),
+                DateFormat.formatDate("dd/mm/yyyy", user.getDeadDate())
+        )).collect(Collectors.toList());
     }
 
 }

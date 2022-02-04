@@ -1,6 +1,7 @@
 package com.intercorp.minproject.components.user.request;
 
 import com.intercorp.minproject.components.user.User;
+import com.intercorp.minproject.components.user.useCase.DeadDay;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,17 +56,20 @@ public class CreateClient {
         this.birthDay = birthDay;
     }
 
-    public Date parseDate () throws ParseException {
-        return new SimpleDateFormat("dd/mm/yyyy").parse(this.birthDay);
+    public Date parseDate(String birthDay) throws ParseException {
+        return new SimpleDateFormat("dd/mm/yyyy").parse(birthDay);
     }
 
+
     public User setToUserFields() throws ParseException {
+        Date birthDay = parseDate(this.birthDay);
         return new User(
-                        this.lastname,
-                        this.name,
-                        this.age,
-                        parseDate()
-                );
+                this.lastname,
+                this.name,
+                this.age,
+                birthDay,
+                parseDate(new DeadDay().calcDeadDate(birthDay))
+        );
     }
 
     @Override

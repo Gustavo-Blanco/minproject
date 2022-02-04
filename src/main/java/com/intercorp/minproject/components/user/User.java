@@ -14,12 +14,14 @@ public class User {
     private String name;
     private Integer age;
     private Date birthDay;
+    private Date deadDate;
 
-    public User(String lastname, String name, Integer age, Date birthDay) {
+    public User(String lastname, String name, Integer age, Date birthDay, Date deadDate) {
         this.lastname = lastname;
         this.name = name;
         this.age = age;
         this.birthDay = birthDay;
+        this.deadDate = deadDate;
     }
 
     public User() {
@@ -63,5 +65,13 @@ public class User {
 
     public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
+    }
+
+    public Date getDeadDate() {
+        return deadDate;
+    }
+
+    public void setDeadDate(Date deadDate) {
+        this.deadDate = deadDate;
     }
 }
