@@ -13,8 +13,13 @@ public class DeadDay {
 
         String stringDate = DateFormat.formatDate("dd/mm/yyyy", date);
         String replaced = stringDate.replaceAll("/", "");
-        Integer sum = transformString(replaced, "");
-        return transformString(sum.toString(), "");
+        Integer sumTotal = 11;
+        String numberToSum = replaced;
+        while (sumTotal >= 10){
+            sumTotal = transformString(numberToSum, "");
+            numberToSum = sumTotal.toString();
+        }
+        return sumTotal;
     }
 
     //get the dead date in string format dd/mm/yyyy
