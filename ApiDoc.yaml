@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: API de agencia de viajes MoonTravels.
+  description: Esta API se ancarga de manejar la prueba técnica de intercorp
+  version: 1.0.0
+servers:
+  - url: https://project-intercorp.azurewebsites.net
+tags:
+  - name: Clientes
+    description: Maneja la información de los clientes
+
+paths:
+  /creacliente:
+    post:
+      tags:
+        - clientes
+      summary: Inserta información de nuevo cliente en la base de datos
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyClientesPost'
+        required: true
+      responses:
+        200:
+          description: (OK) La información del cliente se guardo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoClientesPost'
+
+
+  /kpideclientes:
+    get:
+      tags:
+        - clientes
+      summary: Obtiene la media y desviación estandar de las edades de todos los clientes
+
+      responses:
+        200:
+          description: (OK) La información de los clientes se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoClientesKpiGet'
+
+
+  /listclientes:
+    get:
+      tags:
+        - clientes
+      summary: Listado de clientes más fecha de probable muerte
+
+      responses:
+        200:
+          description: (OK) La información de los clientes se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoClientesListGet'
+
+
+components:
+  schemas:
+
+    BodyClientesPost:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nombre del cliente
+          example: "gustavo"
+        lastname:
+          type: string
+          description: Apellido del cliente
+          example: "blanco"
+        age:
+          type: integer
+          description: Edad del cliente
+          example: 20
+        birthDay:
+          type: string
+          description: Fecha de nacimiento
+          format: "dd/mm/yyy"
+          example: "14/01/2002"
+
+    ExitoClientesPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id del cliente
+          example: 1
+        name:
+          type: string
+          description: Nombre del cliente
+          example: "gustavo"
+        lastname:
+          type: string
+          description: Apellido del cliente
+          example: "blanco"
+        age:
+          type: integer
+          description: Edad del cliente
+          example: 20
+        birthDay:
+          type: string
+          description: Fecha de nacimiento
+          example: "2002-01-01T05:14:00.000+00:00"
+        deadDate:
+          type: string
+          description: Fecha de muerte
+          example: "2082-01-01T05:14:00.000+00:00"
+
+
+    ExitoClientesKpiGet:
+      type: object
+      properties:
+        ageAverage:
+          type: number
+          example: 19.0
+          description: Media de las edades de los clientes
+        standardDeviation:
+          type: number
+          example: 1.0
+          description: Desviación estandar de las edades de los clientes
+
+    ExitoClientesListGet:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Nombre del cliente
+            example: "gustavo"
+          lastname:
+            type: string
+            description: Apellido del cliente
+            example: "blanco"
+          age:
+            type: integer
+            description: Edad del cliente
+            example: 20
+          birthDay:
+            type: string
+            description: Fecha de nacimiento
+            example: "14/01/2002"
+          deadDate:
+            type: string
+            description: Fecha de muerte
+            example: "14/01/2082"
